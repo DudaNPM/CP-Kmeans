@@ -2,17 +2,17 @@ CXX 		= nvcc
 BIN 		= bin/
 SRC 		= src/
 INCLUDES 	= include/
-EXEC 		= stencil
+EXEC 		= k_means_cuda
 
-CXXFLAGS	= -O2 -g -std=c++11 -arch=sm_70 -Wno-deprecated-gpu-targets 
+CXXFLAGS	= -O2 -g -std=c++11 -arch=sm_35 -Wno-deprecated-gpu-targets 
 
-.DEFAULT_GOAL = stencil
+.DEFAULT_GOAL = k_means_cuda
 
-stencil: $(BIN)stencil.o
-	$(CXX) $(CXXFLAGS) $(BIN)stencil.o -o $(BIN)$(EXEC)
+k_means_cuda: $(BIN)k_means_cuda.o
+	$(CXX) $(CXXFLAGS) $(BIN)k_means_cuda.o -o $(BIN)$(EXEC)
 
-$(BIN)stencil.o: $(SRC)stencil.cu $(INCLUDES)k_means_cuda.h 
-	$(CXX) -c $(CXXFLAGS) $(SRC)stencil.cu -o $(BIN)stencil.o
+$(BIN)k_means_cuda.o: $(SRC)k_means_cuda.cu $(INCLUDES)k_means_cuda.h 
+	$(CXX) -c $(CXXFLAGS) $(SRC)k_means_cuda.cu -o $(BIN)k_means_cuda.o
 
 clean:
 	rm -r bin/*
